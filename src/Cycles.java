@@ -2,8 +2,8 @@ import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Cycles {
-    public static void main(String[] args) {
-
+    public static boolean main(String[] args) {
+        boolean ciclo = false;
         Scanner scan = new Scanner(System.in);
         System.out.println("Numero de nodos");
         int nNodos = scan.nextInt();
@@ -12,7 +12,7 @@ public class Cycles {
         System.out.println("Introduzca aristas");
 
         List<ArrayList<Integer>> listaAdyacencias = new ArrayList<>(nNodos);
-        for (int i = 0; i < nNodos; i++){
+        for (int i = 0; i < nNodos; i++) {
             listaAdyacencias.add(i, new ArrayList<>());
         }
         for (int i = 0; i < nAristas; i++) {
@@ -24,8 +24,20 @@ public class Cycles {
         Queue<Integer> cola = new LinkedList<>();
         boolean[] visitados = new boolean[nNodos];
         cola.add(listaAdyacencias.get(0).get(0));
-        while(!cola.isEmpty()){
-            
+        while (!cola.isEmpty()) {
+            cola.remove();
+            for (int i = 0; i < listaAdyacencias.size(); i++) {
+                for (int j = 0; j < listaAdyacencias.get(j).size(); j++) {
+                    if (visitados[listaAdyacencias.get(i).get(j)]) {
+                        System.out.println("Ciclo");
+                        return ciclo;
+                    } else {
+                        cola.add(listaAdyacencias.get(j).get(i));
+                    }
+                }
+            }
         }
+        System.out.println("No ciclo");
+        return ciclo;
     }
 }
