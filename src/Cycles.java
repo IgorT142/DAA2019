@@ -23,22 +23,24 @@ public class Cycles {
 
         Queue<Integer> cola = new LinkedList<>();
         boolean[] visitados = new boolean[nNodos];
-        cola.add(listaAdyacencias.get(0).get(0));
-        while (!cola.isEmpty()) {
-            cola.remove();
             for (int i = 0; i < listaAdyacencias.size(); i++) {
-                for (int j = 0; j < listaAdyacencias.get(j).size(); j++) {
-
-                    if (visitados[listaAdyacencias.get(i).get(j)]) {
-                        System.out.println("Ciclo");
-                        System.exit(1);
-                    } else {
-                        visitados[listaAdyacencias.get(i).get(j)]=true;
-                        cola.add(listaAdyacencias.get(i).get(j));
+                visitados[i] = true;
+                if(!listaAdyacencias.get(i).isEmpty()) {
+                    for (int j = 0; j < listaAdyacencias.get(j).size(); j++) {
+                        if(visitados[i] && visitados[listaAdyacencias.get(i).get(j)]){
+                            System.out.println("Ciclo");
+                            System.exit(1);
+                        }
+                        if (visitados[listaAdyacencias.get(i).get(j)]) {
+                            System.out.println("Ciclo");
+                            System.exit(1);
+                        } else {
+                            visitados[listaAdyacencias.get(i).get(j)] = true;
+                            //cola.add(listaAdyacencias.get(i).get(j));
+                        }
                     }
                 }
             }
-        }
         System.out.println("No ciclo");
     }
 }
