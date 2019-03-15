@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Cycles {
-    public static boolean main(String[] args) {
+    public static void main(String[] args) {
         boolean ciclo = false;
         Scanner scan = new Scanner(System.in);
         System.out.println("Numero de nodos");
@@ -28,16 +28,17 @@ public class Cycles {
             cola.remove();
             for (int i = 0; i < listaAdyacencias.size(); i++) {
                 for (int j = 0; j < listaAdyacencias.get(j).size(); j++) {
+
                     if (visitados[listaAdyacencias.get(i).get(j)]) {
                         System.out.println("Ciclo");
-                        return ciclo;
+                        System.exit(1);
                     } else {
-                        cola.add(listaAdyacencias.get(j).get(i));
+                        visitados[listaAdyacencias.get(i).get(j)]=true;
+                        cola.add(listaAdyacencias.get(i).get(j));
                     }
                 }
             }
         }
         System.out.println("No ciclo");
-        return ciclo;
     }
 }
