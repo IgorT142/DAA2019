@@ -25,15 +25,17 @@ public class Cycles {
         boolean[] visitados = new boolean[nNodos+1];
             for (int i = 0; i < listaAdyacencias.size(); i++) {
                 visitados[i] = true;
-                if(!listaAdyacencias.get(i).isEmpty()) {
+                if(!listaAdyacencias.get(i).isEmpty() && !ciclo) {
                     for (int j = 0; j < listaAdyacencias.get(i).size(); j++) {
                         if(visitados[i] && visitados[listaAdyacencias.get(i).get(j)]){
-                            System.out.println("true");
-                            System.exit(1);
+                            /*System.out.println("true");
+                            System.exit(1);*/
+                            ciclo = true;
                         }
                         if (visitados[listaAdyacencias.get(i).get(j)]) {
-                            System.out.println("true");
-                            System.exit(1);
+                            /*System.out.println("true");
+                            System.exit(1);*/
+                            ciclo = true;
                         } else {
                             visitados[listaAdyacencias.get(i).get(j)] = true;
                             //cola.add(listaAdyacencias.get(i).get(j));
@@ -41,6 +43,6 @@ public class Cycles {
                     }
                 }
             }
-        System.out.println("false");
+        System.out.print(ciclo);
     }
 }
