@@ -24,11 +24,22 @@ public class Activities {
             Collections.sort(listaActividades[i]);
         }
 
-        
+        for (int i = 0; i < casos; i++) {
+            int numActividades = 1;
+            int ultimaActividadEscogida = 0;
+            for(int j=1; j< listaActividades[i].size(); j++){
+                if(listaActividades[i].get(ultimaActividadEscogida).fin <=
+                        listaActividades[i].get(j).inicio){
+                    numActividades++;
+                    ultimaActividadEscogida = j;
+                }
+            }
+            System.out.println(numActividades);
+        }
     }
 
     private static class Activity implements Comparable {
-        int inicio, fin;
+        public int inicio, fin;
 
         public Activity(int inicio, int fin) {
             this.inicio = inicio;
