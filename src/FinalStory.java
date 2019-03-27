@@ -93,8 +93,11 @@ public class FinalStory {
         public int compareTo(Object o) {
             Enemigo e = (Enemigo)o;
             if(Double.compare(e.prioridad,prioridad)==0){
+                if(Double.compare(e.atk,atk) == 0){
+                    return Double.compare(hp,e.hp);
+                } else
                 return Double.compare(e.atk,atk);
-            }
+            } else
             return Double.compare(e.prioridad,prioridad);
         }
     }

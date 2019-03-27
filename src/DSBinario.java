@@ -4,33 +4,37 @@ import java.util.Scanner;
 
 public class DSBinario {
     public static void main(String[] args) {
-        int nEnemigos, nCasos, nivelCaballero;
+        int nEnemigos, nCasos;
+        long nivelCaballero;
         Scanner scan = new Scanner(System.in);
-
         nEnemigos = scan.nextInt();
-        List<Integer> nivelesEnemigos = new ArrayList<>(nEnemigos);
+        List<Long> listaDaños = new ArrayList<>(nEnemigos);
+        List<Long> nivelesEnemigos = new ArrayList<>(nEnemigos);
+        long nivelAcumulado =0;
         for(int i= 0;i < nEnemigos; i++){
-            nivelesEnemigos.add(i,scan.nextInt());
+            nivelesEnemigos.add(i,scan.nextLong());
+            nivelAcumulado += nivelesEnemigos.get(i);
+            listaDaños.add(i, nivelAcumulado);
         }
         nCasos = scan.nextInt();
         for(int i= 0;i < nCasos; i++){
-            nivelCaballero = scan.nextInt();
-            batalla(nivelCaballero,nivelesEnemigos);
+            nivelCaballero = scan.nextLong();
+            batalla(nivelCaballero,nivelesEnemigos,listaDaños);
         }
     }
 
-    public static void batalla(int nivel, List<Integer> lista){
+    public static void batalla(long nivel, List<Long> lista, List<Long> listaDmg){
         if(nivel>lista.get(lista.size()-1)){
-            printearResultado(lista.size()-1,lista);
+            printearResultado(lista.size()-1,listaDmg);
         } else if (nivel<lista.get(0)){
             System.out.println("0 0");
         } else {
             int medio = busquedaBinaria(nivel, lista, 0, lista.size()-1);
-            printearResultado(medio,lista);
+            printearResultado(medio,listaDmg);
         }
 
     }
-    public static int busquedaBinaria(int nivel, List<Integer> lista, int inicio, int fin){
+    public static int busquedaBinaria(long nivel, List<Long> lista, int inicio, int fin){
         int medio = (inicio+fin)/2;
         if(nivel == lista.get(medio))
             return medio;
@@ -46,12 +50,8 @@ public class DSBinario {
             return busquedaBinaria(nivel,lista,medio,fin);
         return -1;
     }
-    public static void printearResultado(int medio, List<Integer> lista){
-        int sumaNiveles = 0;
-        for (int i = 0;i<=medio;i++) {
-            sumaNiveles += lista.get(i);
-        }
-        System.out.println(medio+1 + " " + sumaNiveles);
+    public static void printearResultado(int medio, List<Long> lista){
+        System.out.println(medio+1 + " " + lista.get(medio));
     }
 
 }
