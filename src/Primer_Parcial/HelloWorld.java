@@ -1,3 +1,5 @@
+package Primer_Parcial;
+
 import java.util.Scanner;
 
 public class HelloWorld {

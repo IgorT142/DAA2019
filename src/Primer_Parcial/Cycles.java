@@ -1,3 +1,5 @@
+package Primer_Parcial;
+
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -21,7 +23,6 @@ public class Cycles {
             listaAdyacencias.get(v).add(b);
         }
 
-        Queue<Integer> cola = new LinkedList<>();
         boolean[] visitados = new boolean[nNodos+1];
             for (int i = 0; i < listaAdyacencias.size(); i++) {
                 visitados[i] = true;
@@ -43,6 +44,27 @@ public class Cycles {
                     }
                 }
             }
+
         System.out.print(ciclo);
+            if(encuentraCiclo(listaAdyacencias)){
+                System.out.println("trueeee");
+            }else{
+                System.out.println("falssss");
+            }
+    }
+    public static boolean encuentraCiclo(List<ArrayList<Integer>> lista){
+        boolean[] visitados = new boolean[lista.size()];
+        for (ArrayList<Integer> ady:
+             lista) {
+            for(int i = 0;i<ady.size();i++){
+                visitados[i] = true;
+                if(!visitados[ady.get(i)]){
+                    visitados[ady.get(i)] = true;
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
