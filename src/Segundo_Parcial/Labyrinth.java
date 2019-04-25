@@ -8,7 +8,6 @@ public class Labyrinth {
     private static int pasosMin;
 
     public static void main(String[] args) {
-        int sol = 655;
         Scanner scan = new Scanner(System.in);
         int N;
         N = scan.nextInt();

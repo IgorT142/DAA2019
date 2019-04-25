@@ -17,14 +17,20 @@ public class Sudoku {
         sudokuBackTracking(sudoku, 0, 0);
     }
 
+    @SuppressWarnings("Duplicates")
     public static void sudokuBackTracking(List<Integer> lista[], int posX, int posY) {
         if (lista[posY].get(posX) == 0) {
             for (int i = 1; i <= 9; i++) {
                 if (pruebaNumero(i, lista, posY, posX)) {
                     lista[posY].set(posX, i);
                     if (posX == 8 && posY == 8) {
-                        System.out.println("Solucion");
-                        System.exit(1);
+                        for(int l=0;l<9;l++) {
+                            for (int m = 0; m < 9; m++) {
+                                System.out.print(lista[l].get(m) + " ");
+                            }
+                            System.out.println();
+                        }
+                        System.exit(0);
                     }
                     if (posX == 8) {
                         sudokuBackTracking(lista, 0, posY + 1);
@@ -35,17 +41,16 @@ public class Sudoku {
                     }
                 }
             }
+
+        }
+        if (posX==8 && posY==8) {
             for(int l=0;l<9;l++) {
                 for (int m = 0; m < 9; m++) {
                     System.out.print(lista[l].get(m) + " ");
                 }
                 System.out.println();
             }
-            System.out.println("------------------");
-        }
-        if (posX==8 && posY==8) {
-            System.out.println("Solucion");
-            System.exit(1);
+            System.exit(0);
         }
         if (posX == 8 && lista[posY].get(posX) != 0 ) {
             sudokuBackTracking(lista, 0, posY+1);
@@ -55,6 +60,15 @@ public class Sudoku {
         }
     }
 
+    private static void checker(int numeroInicial, List<Integer>[] lista, int posY, int posX){
+        int nuevaposX= posX - posX % 3;
+        int nuevaposY= posY - posY % 3;
+        for(int i=nuevaposX;i< nuevaposX+3;i++){
+            for (int j= nuevaposY;j<nuevaposY+3;j++){
+
+            }
+        }
+    }
     private static boolean pruebaNumero(int numeroInicial, List<Integer>[] lista, int posY, int posX) {
         for (int i = 0; i < 9; i++) {
             if (numeroInicial == lista[posY].get(i))
